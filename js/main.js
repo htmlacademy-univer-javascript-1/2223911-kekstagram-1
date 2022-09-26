@@ -9,20 +9,16 @@
 Функция может не гарантировать верный результат, если в переданном диапазоне нет ни одного подходящего числа.*/
 
 function RandomInt(min,max){
-    if (min<0 || max<0){
-        return 'Error! Значения должны быть больше нуля';
-    }
-    if (min>=max){
-        return 'Error! Значение \'max\' должно быть больше значения \'min\'!';
-    }
-    return Math.floor(Math.random()*(max - min)+min);
+ if (min < max || min === max && Number.isInteger(min)){
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random()*(max - min + 1))+ min;
+ }
+ return 'Wrong range!';
 }
 console.log( RandomInt(100,200));
 /*Функция для проверки максимальной длины строки. Будет использоваться для проверки длины введённого комментария,
 но должна быть универсальна. Пример использования функции:*/
 function lengthCheck(srt, max){
-    if (structuredClone.length>max){
-        return false
-    }
-    return true
+  return str.length <= max;
 }
