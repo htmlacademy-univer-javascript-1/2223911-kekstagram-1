@@ -26,7 +26,6 @@ const DESCRIPTIONS = [
 'Мне кажется это красиво',
 'Я художник, я так вижу',
 'Ну такоое',
-'Вот',
 'Что было то и выложил',
 'норм фотка',
 'и так сойдёт'
@@ -53,7 +52,7 @@ const createImage = () => ({
   url: `photos/${photoNumberGenerator()}.jpg`,
   description: getRandomElementFromArray(DESCRIPTIONS),
   likes: getRandomPositiveInteger(minLikesCount, maxLikesCount),
-  comments: Array.from({length: getRandomPositiveInteger(1, 9)}, createComment)
+  comments: Array.from({length: getRandomPositiveInteger(1, 8)}, createComment)
 });
 
 const createImages = () => Array.from({length: photoCount}, createImage);
