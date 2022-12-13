@@ -32,7 +32,7 @@ const DESCRIPTIONS = [
 ];
 const minLikesCount = 15;
 const maxLikesCount = 200;
-const commentsCount = 5;
+//const commentsCount = 5;
 const photoCount = 25;
 
 const commentIdGenerator = uniqueNumberGenerator();
