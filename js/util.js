@@ -12,4 +12,5 @@ const uniqueNumberGenerator = () => {
 
   return () => ++prevNumber;
 };
-export {getRandomPositiveInteger, getRandomElementFromArray, checkStringLength, uniqueNumberGenerator};
+const isEscapeKey = (event) => 'Escape' === event.key;
+export {getRandomPositiveInteger, getRandomElementFromArray, checkStringLength, uniqueNumberGenerator,isEscapeKey};

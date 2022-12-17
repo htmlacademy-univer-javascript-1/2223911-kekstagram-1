@@ -32,13 +32,10 @@ const DESCRIPTIONS = [
 ];
 const minLikesCount = 15;
 const maxLikesCount = 200;
-const commentsCount = 5;
 const photoCount = 25;
-
 const commentIdGenerator = uniqueNumberGenerator();
 const photoNumberGenerator = uniqueNumberGenerator();
 const imageIdGenerator = uniqueNumberGenerator();
-
 
 const createComment = () => ({
   id: commentIdGenerator(),
@@ -58,6 +55,3 @@ const createImage = () => ({
 const createImages = () => Array.from({length: photoCount}, createImage);
 
 export {createImages};
-
-
-
