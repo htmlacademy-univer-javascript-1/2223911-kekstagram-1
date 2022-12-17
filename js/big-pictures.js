@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
 
-const MAX_COMMENT_NUMBER = 5;
+const commentCount = 5;
 
 const pictures = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
@@ -59,7 +59,7 @@ const drawComments = (comments, count) => {
 };
 
 const openModal = (image) => {
-  let commentsNumber = MAX_COMMENT_NUMBER;
+  let commentsNumber = commentCount;
   bigPictureImg.src = image.url;
   bigPictureImg.alt = image.description;
   likesCount.textContent = image.likes;
@@ -70,7 +70,7 @@ const openModal = (image) => {
   showCommentsCount(image, commentsNumber);
 
   commentsLoader.addEventListener('click', () => {
-    commentsNumber += MAX_COMMENT_NUMBER;
+    commentsNumber += commentCount;
     showCommentsCount(image, commentsNumber);
   });
 
