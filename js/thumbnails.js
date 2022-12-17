@@ -1,8 +1,7 @@
+import {thumbnailClickHandler} from './big-pictures.js';
 const template = document.querySelector('#picture').content;
 const pictures = document.querySelector('.pictures');
 const documentFragment = document.createDocumentFragment();
-
-import {thumbnailClickHandler} from './big-pictures.js';
 const createThumbnails = (data)=> {
   data.forEach((image,index) =>{
     const picture = template.cloneNode(true);
@@ -17,7 +16,3 @@ const createThumbnails = (data)=> {
   thumbnailClickHandler(data);
 };
 export {createThumbnails};
-
-
-
-
