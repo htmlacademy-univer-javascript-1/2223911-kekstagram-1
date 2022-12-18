@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import {addScaleControlHandlers, setDefaultScaleValue} from './image-zoom.js';
+import {addPictureEffectsControl, removePictureEffectsControl} from './image-effect.js';
 
 const TAG_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/i;
 const hashtagsCount = 5;
@@ -62,10 +64,16 @@ uploadFile.addEventListener('change', () => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', closeUploadFileForm);
   uploadCancel.addEventListener('click', closeUploadFileForm);
+  setDefaultScaleValue();
+  removePictureEffectsControl();
 });
 
 imgUploadForm.addEventListener('submit', (e) => {
   if (!pristine.validate()) {
     e.preventDefault();
+    setDefaultScaleValue();
+    addScaleControlHandlers();
+    addPictureEffectsControl();
+
   }
 });
