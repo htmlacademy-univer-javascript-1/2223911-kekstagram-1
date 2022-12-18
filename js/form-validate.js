@@ -1,6 +1,7 @@
 import {isEscapeKey} from './util.js';
 import {addScaleControlHandlers, setDefaultScaleValue} from './image-zoom.js';
 import {addPictureEffectsControl, removePictureEffectsControl} from './image-effect.js';
+import {sendData} from './api.js';
 
 const TAG_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/i;
 const hashtagsCount = 5;
@@ -9,7 +10,8 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadCancel = document.querySelector('#upload-cancel');
-const textHashtags = document.querySelector('.text__hashtags');
+const imgUploadSubmit = document.querySelector('.img-upload__submit');
+const hashtags = document.querySelector('.text__hashtags');
 const textDescription = document.querySelector('.text__description');
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -17,7 +19,7 @@ const pristine = new Pristine(imgUploadForm, {
   errorTextClass: 'img-upload__error-text'
 });
 
-pristine.addValidator(textHashtags, (value) => {
+pristine.addValidator(hashtags, (value) => {
   if (value !== '') {
     const hashTagsArray = value.toLowerCase().split(' ');
     const hashTagsSet = new Set(hashTagsArray);
@@ -29,7 +31,7 @@ pristine.addValidator(textHashtags, (value) => {
   return true;
 }, 'Хештеги регистронезависимы и не должны повторяться');
 
-pristine.addValidator(textHashtags, (value) => {
+pristine.addValidator(hashtags, (value) => {
   if (value !== '') {
     const hashTagsArray = value.toLowerCase().split(' ');
 
@@ -40,7 +42,7 @@ pristine.addValidator(textHashtags, (value) => {
   return true;
 }, `Максимальное число хештегов - ${hashtagsCount}`);
 
-pristine.addValidator(textHashtags, (value) => {
+pristine.addValidator(hashtags, (value) => {
   if (value === '') {
     return true;
   }
@@ -49,15 +51,21 @@ pristine.addValidator(textHashtags, (value) => {
   return hashTagsArray.every((hashtag) => TAG_REGEX.test(hashtag));
 }, 'Один из введённых вами хештегов некорректен');
 
-const closeUploadFileForm = (e) => {
-  if ((isEscapeKey(e) && document.activeElement !== textHashtags && document.activeElement !== textDescription) || e.type === 'click') {
+const closeUploadFileForm = (value = null, clear = true) => {
+  if ((isEscapeKey(value) && document.activeElement !== hashtags && document.activeElement !== textDescription)||( value === null )|| (value.type === 'click')) {
     imgUploadOverlay.classList.add('hidden');
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', closeUploadFileForm);
     uploadCancel.removeEventListener('click', closeUploadFileForm);
-    imgUploadForm.reset();
+
+    if (clear) {
+      imgUploadForm.reset();
+      scaleUploadImage.init();
+      applyChanges('none');
+    }
   }
 };
+
 
 uploadFile.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
@@ -74,6 +82,5 @@ imgUploadForm.addEventListener('submit', (e) => {
     setDefaultScaleValue();
     addScaleControlHandlers();
     addPictureEffectsControl();
-
   }
 });

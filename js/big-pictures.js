@@ -13,12 +13,12 @@ const socialCommentCount = document.querySelector('.social__comment-count');
 const commentsLoader = document.querySelector('.comments-loader');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
 
-const closeModal = (e) => {
+const modalClose  = (e) => {
   if (isEscapeKey(e) || e.type === 'click') {
     bigPicture.classList.add('hidden');
     document.body.classList.remove('modal-open');
-    document.removeEventListener('keydown', closeModal);
-    bigPictureCancel.removeEventListener('click', closeModal);
+    document.removeEventListener('keydown', modalClose );
+    bigPictureCancel.removeEventListener('click', modalClose );
   }
 };
 
@@ -58,10 +58,10 @@ const drawComments = (comments, count) => {
   });
 };
 
-const openModal = (image) => {
+const modalOpen = (image) => {
   let commentsNumber = commentCount;
-  bigPictureImg.src = image.url;
   bigPictureImg.alt = image.description;
+  bigPictureImg.src = image.url;
   likesCount.textContent = image.likes;
   commentsCount.textContent = image.comments.length;
   socialCaption.textContent = image.description;
@@ -76,8 +76,8 @@ const openModal = (image) => {
 
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', closeModal);
-  bigPictureCancel.addEventListener('click', closeModal);
+  document.addEventListener('keydown', modalClose );
+  bigPictureCancel.addEventListener('click', modalClose );
 };
 
 const thumbnailClickHandler = (data) => {
@@ -85,9 +85,9 @@ const thumbnailClickHandler = (data) => {
     const picture = e.target.closest('.picture');
 
     if (picture) {
-      openModal(data[picture.dataset.index]);
+      modalOpen(data[picture.dataset.index]);
     }
   });
 };
 
-export {thumbnailClickHandler};
+export {modalClose, thumbnailClickHandler};

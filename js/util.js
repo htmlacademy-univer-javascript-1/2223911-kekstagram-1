@@ -5,7 +5,6 @@ const getRandomPositiveInteger = (a, b) => {
   return Math.floor(result);
 };
 const getRandomElementFromArray = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
-const checkStringLength = (string, length) => string.length <= length;
 
 const uniqueNumberGenerator = () => {
   let prevNumber = 0;
@@ -13,4 +12,4 @@ const uniqueNumberGenerator = () => {
   return () => ++prevNumber;
 };
 const isEscapeKey = (event) => 'Escape' === event.key;
-export {getRandomPositiveInteger, getRandomElementFromArray, checkStringLength, uniqueNumberGenerator,isEscapeKey};
+export {getRandomPositiveInteger, getRandomElementFromArray, uniqueNumberGenerator,isEscapeKey};
