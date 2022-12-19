@@ -2,8 +2,10 @@ import './util.js';
 import {createThumbnails} from './thumbnails.js';
 import './form-validate.js';
 import {getData} from './api.js';
+import './filters.js';
+\
 import './big-pictures.js';
-import {showError, showSuccess} from './alerts.js';
+import {showError, showSuccess} from './notifications.js';
 
 getData((photo) => {
     createThumbnails(photo);
