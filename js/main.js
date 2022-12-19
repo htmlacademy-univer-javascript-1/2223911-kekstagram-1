@@ -18,5 +18,3 @@ getData((photo) => {
     closeUploadFileForm(null, false);
     showError();
   });
-
-
