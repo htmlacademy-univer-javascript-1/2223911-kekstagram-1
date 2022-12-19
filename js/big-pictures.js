@@ -17,7 +17,7 @@ const documentFragment = document.createDocumentFragment();
 const createComments = () => {
   const commentsNumber = 0;
   let comments = [];
-  let commentsCount = 0;
+  let commentsCountCreate = 0;
   const renderComments = (message) => {
     socialComments.innerHTML = '';
 
@@ -33,14 +33,14 @@ const createComments = () => {
   };
 
   const eventListener = () => {
-    let newCommentNumber = commentsNumber + maxNumberComment;
-    commentsNumber = newCommentNumber >= commentsCount ? commentsCount : newCommentNumber;
+    const newCommentNumber = commentsNumber + maxNumberComment;
+    commentsNumber = newCommentNumber >= commentsCountCreate ? commentsCountCreate : newCommentNumber;
 
     renderComments(comments.slice(0, commentsNumber));
 
-    socialCommentCount.textContent = `${commentsNumber} из ${commentsCount} комментариев`;
+    socialCommentCount.textContent = `${commentsNumber} из ${commentsCountCreate} комментариев`;
 
-    if (commentsNumber === commentsCount) {
+    if (commentsNumber === commentsCountCreate) {
       commentsLoader.classList.add('hidden');
     }
   };
@@ -54,7 +54,7 @@ const createComments = () => {
   };
 
   const init = (totalComments) => {
-    commentsCount = totalComments.length;
+    commentsCountCreate = totalComments.length;
     comments = totalComments;
     commentsNumber = 0;
     commentsLoader.classList.remove('hidden');
@@ -88,7 +88,7 @@ const openModal = (photo) => {
   commentsCount.textContent = photo.commentsCreateFunction.length;
   socialCaption.textContent = photo.description;
 
-  comments.init(photo.comments);
+  commentsCreateFunction.init(photo.comments);
 
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
