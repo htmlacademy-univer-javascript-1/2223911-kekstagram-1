@@ -15,9 +15,10 @@ const commentTemplate = document.querySelector('#comment').content;
 const documentFragment = document.createDocumentFragment();
 
 const createComments = () => {
-  const commentsNumber = 0;
+  let commentsNumber = 0;
   let comments = [];
   let commentsCountCreate = 0;
+
   const renderComments = (message) => {
     socialComments.innerHTML = '';
 
