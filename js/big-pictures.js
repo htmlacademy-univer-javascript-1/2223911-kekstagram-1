@@ -15,7 +15,7 @@ const commentTemplate = document.querySelector('#comment').content;
 const documentFragment = document.createDocumentFragment();
 
 const createComments = () => {
-  let commentsNumber = 0;
+  const commentsNumber = 0;
   let comments = [];
   let commentsCount = 0;
   const renderComments = (message) => {
@@ -68,7 +68,7 @@ const createComments = () => {
   };
 };
 
-const comments = createComments();
+const commentsCreateFunction = createComments();
 
 const closeModal = (e) => {
   if (isEscapeKey(e) || e.type === 'click') {
@@ -81,11 +81,11 @@ const closeModal = (e) => {
 };
 
 const openModal = (photo) => {
-  let commentsNumber = maxNumberComment;
+  //let commentsNumberModal = maxNumberComment;
   bigPictureImg.src = photo.url;
   bigPictureImg.alt = photo.description;
   likesCount.textContent = photo.likes;
-  commentsCount.textContent = photo.comments.length;
+  commentsCount.textContent = photo.commentsCreateFunction.length;
   socialCaption.textContent = photo.description;
 
   comments.init(photo.comments);
