@@ -33,7 +33,7 @@ const createComments = () => {
   };
 
   const eventListener = () => {
-    const newCommentNumber = commentsNumber + maxNumberComment;
+    let newCommentNumber = commentsNumber + maxNumberComment;
     commentsNumber = newCommentNumber >= commentsCount ? commentsCount : newCommentNumber;
 
     renderComments(comments.slice(0, commentsNumber));
@@ -76,7 +76,7 @@ const closeModal = (e) => {
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', closeModal);
     bigPictureCancel.removeEventListener('click', closeModal);
-    comments.removeEventListener();
+    commentsCreateFunction.removeEventListener();
   }
 };
 
