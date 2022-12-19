@@ -19,10 +19,10 @@ const createComments = () => {
   let comments = [];
   let commentsCountCreate = 0;
 
-  const renderComments = (message) => {
+  const renderComments = (messageActive) => {
     socialComments.innerHTML = '';
 
-    message.forEach((comment) => {
+    messageActive.forEach((comment) => {
       const commentNode = commentTemplate.cloneNode(true);
       commentNode.querySelector('.social__picture').src = comment.avatar;
       commentNode.querySelector('.social__picture').alt = comment.name;
