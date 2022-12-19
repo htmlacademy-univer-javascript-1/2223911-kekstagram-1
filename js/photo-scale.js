@@ -39,5 +39,5 @@ const scalePhoto = (scaleValue, imgTransform) => {
 };
 
 export {
-  scalePhoto as scaleImage
+  scalePhoto
 };

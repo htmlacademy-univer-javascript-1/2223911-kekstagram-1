@@ -15,8 +15,6 @@ const uniqueNumberGenerator = () => {
   return () => ++prevNumber;
 };
 
-const isEscapeKey = (event) => event.key === 'Escape';
-
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
@@ -53,13 +51,6 @@ const shuffleArray = (array) => {
 
   return array;
 };
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {
-  getRandomInteger,
-  getRandomElementFromArray,
-  uniqueNumberGenerator,
-  isEscapeKey,
-  debounce,
-  throttle,
-  shuffleArray
-};
+export {getRandomInteger,getRandomElementFromArray,uniqueNumberGenerator,isEscapeKey,debounce,throttle,shuffleArray};
