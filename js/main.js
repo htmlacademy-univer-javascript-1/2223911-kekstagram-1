@@ -5,16 +5,18 @@ import {getData} from './api.js';
 import './big-pictures.js';
 import {showError, showSuccess} from './alerts.js';
 
-getData((photos) => {
-    createThumbnails(photos);
-    applyFilters(
-      debounce(() => createThumbnails(photos)),
-      RENDER_DELAY
-    );
-  },
-  () => {
-    renderLoadError('Не удалось загрузить фотографии(');
+getData((photo) => {
+    createThumbnails(photo);
+    showFilters();
+    setFilter(debounce((filterData) => createThumbnails(filterData(photo)), TIMEOUT_DELAY));
   });
 
+  setUserFormSubmit(() => {
+    closeUploadFileForm();
+    showSuccess();
+  }, () => {
+    closeUploadFileForm(null, false);
+    showError();
+  });
 
 
