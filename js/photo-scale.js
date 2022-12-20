@@ -10,7 +10,7 @@ const scalePhoto = (controlValue, imgTransform) => {
     imgTransform.style.transform = `scale(${scaleValue / 100})`;
   };
 
- const increaseValue = () => {
+  const increaseValue = () => {
     if (scaleValue !== maxValue) {
       scaleValue += stepScale;
       applyChanges();
@@ -21,8 +21,9 @@ const scalePhoto = (controlValue, imgTransform) => {
     scaleValue = maxValue;
     applyChanges();
   };
-
+  
   initial();
+  
   const decreaseValue = () => {
     if (scaleValue !== minValue) {
       scaleValue -= stepScale;
