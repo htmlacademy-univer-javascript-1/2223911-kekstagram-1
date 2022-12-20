@@ -2,9 +2,8 @@ import {debounce} from './util.js';
 import {getData} from './api.js';
 import {createThumbnails} from './thumbnails.js';
 import {setUserFormSubmit, closeUploadFileForm} from './form.js';
-
 import {thumbnailClickHandler} from './big-pictures.js';
-import {revealError, showSuccess as revealSuccess} from './notifications.js';
+import {revealError, revealSuccess} from './notifications.js';
 import {setFilters, revealFilters, RERENDER_DELAY} from './filters.js';
 
 getData((data) => {
