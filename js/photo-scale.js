@@ -12,12 +12,12 @@ const scalePhoto = (scaleValue, imgTransform) => {
     }
   };
 
-  const init = () => {
+  const initial = () => {
     scaleValue = maxValue;
     applyChanges();
   };
 
-  init();
+  initial();
 
 
  const applyChanges = () => {
@@ -32,7 +32,7 @@ const scalePhoto = (scaleValue, imgTransform) => {
   };
 
   return {
-    init,
+    initial,
     increaseValue,
     decreaseValue,
   };
