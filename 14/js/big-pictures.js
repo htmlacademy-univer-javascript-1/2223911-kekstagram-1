@@ -41,7 +41,7 @@ const thumbnailClickHandler = (data) => {
     const picture = e.target.closest('.picture');
 
     if (picture) {
-      openModal(data.find((photo) => photo.id === Number(picture.dataset.index)));
+      openModal(data.find((image) => image.id === Number(picture.dataset.index)));
     }
   });
 };
