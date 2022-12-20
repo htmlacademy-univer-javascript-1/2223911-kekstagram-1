@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import { createComments} from './createComments.js';
+import { createComments} from './create-comments.js';
 
 const commentsCreateFunction = createComments();
 
