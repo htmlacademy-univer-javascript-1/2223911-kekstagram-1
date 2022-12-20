@@ -1,16 +1,11 @@
 import {isEscapeKey} from './util.js';
-import {smartSlider} from './image-effects.js';
+import {regulatorFunction} from './photos-effect';
 import {scalePhoto} from './photo-scale.js';
 import {sendData} from './api.js';
 import {revealError} from './notifications.js';
 
-
-
-import {smartSlider} from './slider.js';
-
-
 const maxNumberTags = 5;
-const TAG_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/i;
+const TAG_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
 
 const typeFileArray = ['gif', 'jpg', 'jpeg', 'png'];
 
@@ -73,7 +68,7 @@ const effectLevelValue = document.querySelector('.effect-level__value');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const imgUploadSubmit = document.querySelector('.img-upload__submit');
 
-const smartSliderFilters = smartSlider('none', effectLevelSlider, effectLevelValue);
+const smartSliderFilters = regulatorFunction('none', effectLevelSlider, effectLevelValue);
 const scaleUploadImage = scalePhoto(scaleControlValue, imgPreview);
 
 pristine.addValidator(textHashtags, checkIfHashtagsRepeated, 'Хештеги регистронезависимы и не должны повторяться');
