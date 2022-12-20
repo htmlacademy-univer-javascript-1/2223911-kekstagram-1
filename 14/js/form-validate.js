@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {regulatorFunction} from './photos-effect';
+import {regulatorFunction} from './photos-effect.js';
 import {scalePhoto} from './photo-scale.js';
 import {sendData} from './api.js';
 import {revealError} from './notifications.js';
