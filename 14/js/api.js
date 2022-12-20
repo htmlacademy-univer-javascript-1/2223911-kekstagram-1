@@ -1,5 +1,5 @@
-const SERVER_GET_URL = 'https://27.javascript.pages.academy/kekstagram/data';
-const SERVER_POST_URL = 'https://27.javascript.pages.academy/kekstagram';
+const SERVER_GET_URL = 'https://26.javascript.pages.academy/kekstagram/data';
+const SERVER_POST_URL = 'https://26.javascript.pages.academy/kekstagram';
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
