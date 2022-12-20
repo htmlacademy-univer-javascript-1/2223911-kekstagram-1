@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import { createComments} from './create-comments.js';
+import {createComments} from './create-comments.js';
 
 const commentsCreateFunction = createComments();
 
@@ -28,7 +28,7 @@ const openModal = (photo) => {
   commentsCount.textContent = photo.commentsCreateFunction.length;
   socialCaption.textContent = photo.description;
 
-  commentsCreateFunction.init(photo.comments);
+  commentsCreateFunction.init(photo.commentsCreateFunction);
 
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
