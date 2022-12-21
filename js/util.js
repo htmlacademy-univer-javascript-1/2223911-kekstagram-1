@@ -31,9 +31,10 @@ const shuffleArray = (array) => {
 
     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
-
+  
   return array;
 };
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {isEscapeKey,debounce,throttle,shuffleArray};
