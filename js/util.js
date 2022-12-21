@@ -7,7 +7,6 @@ const debounce = (callback, timeoutDelay = 500) => {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
-
 const throttle = (callback, delayBetweenFrames) => {
   let lastTime = 0;
 
@@ -20,7 +19,6 @@ const throttle = (callback, delayBetweenFrames) => {
     }
   };
 };
-
 const shuffleArray = (array) => {
   let currentIndex = array.length;
   let randomIndex;
@@ -31,10 +29,8 @@ const shuffleArray = (array) => {
 
     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
-  
   return array;
 };
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {isEscapeKey,debounce,throttle,shuffleArray};
