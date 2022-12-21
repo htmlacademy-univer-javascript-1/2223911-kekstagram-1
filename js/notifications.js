@@ -3,7 +3,7 @@ import {isEscapeKey} from './util.js';
 const templateError = document.querySelector('#error').content;
 const templateSuccess = document.querySelector('#success').content;
 
-const showError = () => {
+const revealError = () => {
   const error = templateError.cloneNode(true);
 
   const closeModal = (value) => {
@@ -27,17 +27,17 @@ const showError = () => {
   document.addEventListener('keydown', closeModal);
   document.body.append(error);
 };
-const showSuccess = () => {
+const revealSuccess = () => {
   const success = templateSuccess.cloneNode(true);
 
-  const closeModal = (e) => {
-    if (isEscapeKey(e)) {
+  const closeModal = (value) => {
+    if (isEscapeKey(value)) {
       document.removeEventListener('click', closeModal);
       document.removeEventListener('keydown', closeModal);
       document.querySelector('.success').remove();
-    } else if (e.type === 'click') {
-      const successInner = e.target.closest('.success__inner');
-      const successButton = e.target.closest('.success__button');
+    } else if (value.type === 'click') {
+      const successInner = value.target.closest('.success__inner');
+      const successButton = value.target.closest('.success__button');
 
       if ((successInner && successButton) || (!successInner && !successButton)) {
         document.removeEventListener('click', closeModal);
@@ -52,6 +52,6 @@ const showSuccess = () => {
   document.body.append(success);
 };
 export {
-  showSuccess,
-  showError
+  revealSuccess,
+  revealError
 };

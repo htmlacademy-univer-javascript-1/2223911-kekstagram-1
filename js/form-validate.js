@@ -1,9 +1,18 @@
 import {isEscapeKey} from './util.js';
-import {smartSlider} from './image-effects.js';
-import {scaleImage} from './photo-scale.js';
+import {regulatorFunction} from './photos-effect.js';
+import {scalePhoto} from './photo-scale.js';
 import {sendData} from './api.js';
-const TAG_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/i;
+import {revealError} from './notifications.js';
+
 const maxNumberTags = 5;
+const TAG_REGEX = /^#[A-Za-zА-Яа-яЕё0-9]{1,19}$/;
+
+const typeFileArray = ['gif', 'jpg', 'jpeg', 'png'];
+
+const checkFileType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return typeFileArray.some((it) => fileName.endsWith(it));
+};
 
 const splitHashtags = (value) => value.toLowerCase().split(' ');
 
@@ -38,6 +47,7 @@ const checkIfHashtagCorrect = (value) => {
   const hashTagsArray = splitHashtags(value);
   return hashTagsArray.every((hashtag) => TAG_REGEX.test(hashtag));
 };
+
 const imgUploadForm = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -58,8 +68,8 @@ const effectLevelValue = document.querySelector('.effect-level__value');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const imgUploadSubmit = document.querySelector('.img-upload__submit');
 
-const smartSliderFilters = smartSlider('none', effectLevelSlider, effectLevelValue);
-const scaleUploadImage = scaleImage(scaleControlValue, imgPreview);
+const smartSliderFilters = regulatorFunction('none', effectLevelSlider, effectLevelValue);
+const scaleUploadImage = scalePhoto(scaleControlValue, imgPreview);
 
 pristine.addValidator(textHashtags, checkIfHashtagsRepeated, 'Хештеги регистронезависимы и не должны повторяться');
 pristine.addValidator(textHashtags, checkMaxHashtagsCount, `Максимальное число хештегов - ${maxNumberTags}`);
@@ -88,11 +98,19 @@ const closeUploadFileForm = (e = null, clear = true) => {
   }
 };
 
-uploadFile.addEventListener('change', () => {
-  imgUploadOverlay.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-  document.addEventListener('keydown', closeUploadFileForm);
-  uploadCancel.addEventListener('click', closeUploadFileForm);
+uploadFile.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const isCorrectFileType = checkFileType(file);
+
+  if (isCorrectFileType) {
+    imgPreview.src = URL.createObjectURL(file);
+    imgUploadOverlay.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    document.addEventListener('keydown', closeUploadFileForm);
+    uploadCancel.addEventListener('click', closeUploadFileForm);
+  } else {
+    revealError();
+  }
 });
 
 const blockSubmitButton = () => {
@@ -106,8 +124,8 @@ const unblockSubmitButton = () => {
 };
 
 const setUserFormSubmit = (onSuccess, onError) => {
-  imgUploadForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
     const isValid = pristine.validate();
     if (isValid) {
@@ -119,7 +137,6 @@ const setUserFormSubmit = (onSuccess, onError) => {
         },
         () => {
           onError();
-
           unblockSubmitButton();
         },
         new FormData(imgUploadForm)
@@ -138,8 +155,8 @@ effectLevelSlider.noUiSlider.on('update', () => {
   imgPreview.style.filter = smartSliderFilters.getStyles();
 });
 
-effectsList.addEventListener('click', (e) => {
-  const effectsItems = e.target.closest('.effects__item');
+effectsList.addEventListener('click', (evt) => {
+  const effectsItems = evt.target.closest('.effects__item');
   if (effectsItems) {
     const value = effectsItems.querySelector('.effects__radio').value;
     applyChanges(value);

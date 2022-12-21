@@ -1,21 +1,22 @@
-import './util.js';
-import {createThumbnails} from './thumbnails.js';
-import './form-validate.js';
+import {debounce} from './util.js';
 import {getData} from './api.js';
-import './filters.js';
-import './big-pictures.js';
-import {showError, showSuccess} from './notifications.js';
+import {createThumbnails} from './thumbnails.js';
+import {setUserFormSubmit, closeUploadFileForm} from './form-validate.js';
+import {thumbnailClickHandler} from './big-pictures.js';
+import {revealError, revealSuccess} from './notifications.js';
+import {setFilters, revealFilters, RERENDER_DELAY} from './filters.js';
 
-getData((photo) => {
-    createThumbnails(photo);
-    showFilters();
-    setFilter(debounce((filterData) => createThumbnails(filterData(photo)), TIMEOUT_DELAY));
-  });
+getData((data) => {
+  createThumbnails(data);
+  revealFilters();
+  setFilters(debounce((filterData) => createThumbnails(filterData(data)), RERENDER_DELAY));
+  thumbnailClickHandler(data);
+});
 
-  setUserFormSubmit(() => {
-    closeUploadFileForm();
-    showSuccess();
-  }, () => {
-    closeUploadFileForm(null, false);
-    showError();
-  });
+setUserFormSubmit(() => {
+  closeUploadFileForm();
+  revealSuccess();
+}, () => {
+  closeUploadFileForm(null, false);
+  revealError();
+});
