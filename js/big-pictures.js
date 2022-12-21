@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {createComments} from './create-comments.js';
+import { createComments} from './create-сomments.js';
 
 const commentsCreateFunction = createComments();
 
@@ -25,10 +25,10 @@ const openModal = (photo) => {
   bigPictureImg.src = photo.url;
   bigPictureImg.alt = photo.description;
   likesCount.textContent = photo.likes;
-  commentsCount.textContent = photo.commentsCreateFunction.length;
+  commentsCount.textContent = photo.comments.length;
   socialCaption.textContent = photo.description;
 
-  commentsCreateFunction.init(photo.commentsCreateFunction);
+  commentsCreateFunction.init(photo.comments);
 
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -41,7 +41,7 @@ const thumbnailClickHandler = (data) => {
     const picture = e.target.closest('.picture');
 
     if (picture) {
-      openModal(data.find((image) => image.id === Number(picture.dataset.index)));
+      openModal(data.find((photo) => photo.id === Number(picture.dataset.index)));
     }
   });
 };
