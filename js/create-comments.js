@@ -5,9 +5,9 @@ const commentTemplate = document.querySelector('#comment').content;
 const documentFragment = document.createDocumentFragment();
 const maxNumberComment = 5;
 const createComments = () => {
-  let number = 0;
+  let numberComment = 0;
   let comments = [];
-  let commentsCountCreate = 0;
+  let commentsCount = 0;
 
   const renderComments = (messageActive) => {
     socialComments.innerHTML = '';
@@ -24,13 +24,13 @@ const createComments = () => {
   };
 
   const eventListener = () => {
-    const newCommentNumber = number + maxNumberComment;
-    number = newCommentNumber >= commentsCountCreate ? commentsCountCreate : newCommentNumber;
+    const newCommentNumber = numberComment + maxNumberComment;
+    numberComment = newCommentNumber >= commentsCount ? commentsCount : newCommentNumber;
 
-    renderComments(comments.slice(0, number));
+    renderComments(comments.slice(0, numberComment));
 
-    socialCommentCount.textContent = `${number} из ${commentsCountCreate} комментариев`;
-    if (number === commentsCountCreate) {
+    socialCommentCount.textContent = `${numberComment} из ${commentsCount} комментариев`;
+    if (numberComment === commentsCount) {
       commentsLoader.classList.add('hidden');
     }
   };
@@ -44,8 +44,8 @@ const createComments = () => {
   };
 
   const init = (totalComments) => {
-    number = 0;
-    commentsCountCreate = totalComments.length;
+    numberComment = 0;
+    commentsCount = totalComments.length;
     comments = totalComments;
     commentsLoader.classList.remove('hidden');
     eventListener();

@@ -1,20 +1,3 @@
-const getRandomInteger = (min, max) => {
-  if (min < max || min === max && Number.isInteger(min)) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  return 'Wrong range!';
-};
-
-const getRandomElementFromArray = (array) => array[getRandomInteger(0, array.length - 1)];
-
-const uniqueNumberGenerator = () => {
-  let prevNumber = 0;
-
-  return () => ++prevNumber;
-};
-
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
@@ -24,7 +7,6 @@ const debounce = (callback, timeoutDelay = 500) => {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
-
 const throttle = (callback, delayBetweenFrames) => {
   let lastTime = 0;
 
@@ -37,7 +19,6 @@ const throttle = (callback, delayBetweenFrames) => {
     }
   };
 };
-
 const shuffleArray = (array) => {
   let currentIndex = array.length;
   let randomIndex;
@@ -48,9 +29,8 @@ const shuffleArray = (array) => {
 
     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
-
   return array;
 };
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomInteger,getRandomElementFromArray,uniqueNumberGenerator,isEscapeKey,debounce,throttle,shuffleArray};
+export {isEscapeKey,debounce,throttle,shuffleArray};
